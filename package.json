@@ -1,0 +1,22 @@
+{
+  "name": "tweetboard-client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "immutable": "^3.8.1",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-router": "^4.1.1"
+  },
+  "devDependencies": {
+    "react-scripts": "0.9.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "dev": "REACT_APP_ENV=development react-scripts start",
+    "build:dev": "REACT_APP_ENV=development react-scripts build",
+    "build": "REACT_APP_ENV=production react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

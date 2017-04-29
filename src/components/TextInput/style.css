@@ -1,0 +1,24 @@
+.text-input {
+  font-family: 'Roboto', sans-serif;
+  background: white;
+  border: 1px solid #E6E6E6;
+  border-radius: 4px;
+  color: #47525E;
+  height: 70px;
+  margin-bottom: 15px;
+  padding-left: 20px;
+  width: 100%;
+  font-size: 1.5em;
+
+  transition: border-color 0.3s;
+}
+
+.text-input:focus {
+  border-color: #47525E;
+}
+
+:local
+.invalid {
+  border-color: #9A3536;
+  color: #E94141;
+}

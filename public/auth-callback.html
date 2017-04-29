@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TweetBoard Authentication</title>
+  </head>
+  <body>
+    <h1><center>Machines are working be patient...</center></h1>
+    <script>
+      function b64DecodeUnicode(str) {
+          return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) {
+              return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+          }).join(''));
+      }
+
+      var queryParams = window.location.search || '';
+      queryParams = queryParams.substr(1);
+      queryParams = queryParams.split('&').reduce(function(acc, item) {
+        if (!item) return acc;
+
+        var pair = item.split('=');
+
+        if (pair.length < 2 || !pair[1]) return acc;
+
+        acc[pair[0]] = pair[1];
+        return acc;
+      },{});
+
+      var postData = {};
+
+      if (queryParams.hasOwnProperty('error')) {
+        var error = b64DecodeUnicode(queryParams.error)
+        postData.error = error;
+      } else {
+        var data = b64DecodeUnicode(queryParams.payload);
+        postData.token = queryParams.token;
+        postData.user = JSON.parse(data);
+      }
+
+      window.opener.postMessage(postData, 'http://127.0.0.1:3000/');
+
+    </script>
+  </body>
+</html>

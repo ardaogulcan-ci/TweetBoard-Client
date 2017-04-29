@@ -1,0 +1,31 @@
+.header {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: center;
+}
+.header .logo-container {
+  flex: 1 0 auto;
+}
+
+.header .logo-container .logo {
+  padding: 0;
+  margin: 0;
+  font-size: 3em;
+}
+
+
+.header .buttons-container {
+  flex: 0 1 auto;
+  display: flex;
+}
+
+
+.header .buttons-container .button {
+  margin-left: 10px;
+  flex: 0 1 auto;
+};

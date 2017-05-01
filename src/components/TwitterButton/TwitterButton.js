@@ -3,6 +3,8 @@ import React, { Component, PropTypes } from 'react';
 import Button from '../Button/Button';
 import twitterIcon from '../../assets/twitter.svg';
 
+import config from '../../configs/environment'
+
 import styles from './style.css';
 
 class TwitterButton extends Component {
@@ -14,7 +16,7 @@ class TwitterButton extends Component {
   }
 
   handleTwitter() {
-    this.authWindow = window.open('http://127.0.0.1:9000/v1/auth/twitter', 'Twitter Authentication','width=450,height=550');
+    this.authWindow = window.open(`${config.api.url}/auth/twitter`, 'Twitter Authentication','width=450,height=550');
 
     window.addEventListener('message', this.handleAuthCallbackMessage, false);
 

@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import { Map } from 'immutable';
+import { fromJS } from 'immutable';
 
 import routes from './routes';
 import configureStore from './store/configureStore';
@@ -14,10 +14,10 @@ import 'normalize.css';
 import './style.css';
 
 const token = localStorage.getItem('token');
-const user = localStorage.getItem('user');
+const user = localStorage.getItem('user') && JSON.parse(localStorage.getItem('user'));
 
 const store = configureStore({
-  authentication: Map({
+  authentication: fromJS({
     loading: false,
     valid: true,
     error: null,

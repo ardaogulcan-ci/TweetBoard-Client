@@ -17,9 +17,13 @@ class HomeContainer extends Component {
   }
 
   render() {
+    const user = this.props.authentication.get('user');
     return (
       <div className="center">
-        <Header onTwitterEvent={this.handleTwitterEvent.bind(this)}/>
+        <Header
+          onTwitterEvent={this.handleTwitterEvent.bind(this)}
+          user={user}
+          />
         <main>
           <TextInput type="text" />
         </main>

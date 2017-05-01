@@ -12,13 +12,13 @@ const initialState = fromJS({
 export default createReducer(initialState, {
   SIGN_IN_START: state => state.set('loading', true),
 
-  SIGN_IN_COMPLETE: (state, {data: { token, user }}) => state.merge({
+  SIGN_IN_COMPLETE: (state, {data: { token, user }}) => state.merge(fromJS({
     loading: false,
     valid: true,
     error: null,
     token,
     user,
-  }),
+  })),
 
   SIGN_IN_ERROR: (state, { error }) => state.merge({
     loading: false,

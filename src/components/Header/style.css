@@ -8,6 +8,7 @@
   align-content: stretch;
   align-items: center;
 }
+
 .header .logo-container {
   flex: 1 0 auto;
 }
@@ -18,14 +19,26 @@
   font-size: 3em;
 }
 
-
-.header .buttons-container {
+.header .buttons-container, .header .menu-container {
   flex: 0 1 auto;
   display: flex;
 }
 
-
 .header .buttons-container .button {
   margin-left: 10px;
   flex: 0 1 auto;
-};
+}
+
+.header .menu-container .profile-picture {
+  position: relative;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-left: 20px;
+}
+
+.header .menu-container .profile-picture img {
+  width: 55px;
+  height: 55px;
+}

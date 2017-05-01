@@ -38,7 +38,7 @@
         postData.user = JSON.parse(data);
       }
 
-      window.opener.postMessage(postData, 'http://127.0.0.1:3000/');
+      window.opener.postMessage(postData, window.opener.location.href);
 
     </script>
   </body>

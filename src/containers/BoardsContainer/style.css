@@ -1,0 +1,17 @@
+.boards-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: center;
+  height: 100%;
+}
+
+.boards-container .board-explorer {
+  flex: 0 1 auto;
+}
+
+.boards-container .board {
+  flex: 1 0 auto;
+}

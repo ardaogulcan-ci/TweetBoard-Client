@@ -4,7 +4,6 @@ function handleResponse(response) {
     return response.ok ? json : Promise.reject(json);
   });
 }
-const paginationLimit = 30;
 
 export default class Api {
   constructor(url, token = null) {
@@ -37,6 +36,14 @@ export default class Api {
     }
 
     return headers;
+  }
+
+  getBoardsOfUser(userSlug) {
+    return fetch(`${this._url}/${userSlug}/boards`, {
+      method: 'get',
+      headers: this.header(),
+    })
+    .then(handleResponse);
   }
 
 }

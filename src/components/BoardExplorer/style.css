@@ -1,0 +1,30 @@
+.boards-container .board-explorer {
+  width: 240px;
+  background: white;
+  height: 100%;
+}
+
+.boards-container .board-explorer .profile-box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: center;
+}
+
+.boards-container .board-explorer .profile-box .picture-container {
+  flex: 0 1 auto;
+  padding: 15px;
+}
+
+.boards-container .board-explorer .profile-box .name-container {
+  flex: 1 0 auto;
+  font-size: 1.2em;
+  margin: 0;
+  padding: 0;
+}
+
+.boards-container .board-explorer .menu-container .add-board-button-container {
+  padding: 15px;
+}

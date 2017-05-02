@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 
 import TwitterButton from '../../components/TwitterButton/TwitterButton';
 import Button from '../../components/Button/Button';
+import ProfilePicture from '../../components/ProfilePicture/ProfilePicture';
 
 import './style.css';
 
@@ -33,15 +35,15 @@ class Header extends Component {
         { user &&
           <div className="menu-container">
             <nav className="menu">
-              <Button
-                className="brand-blue-bg"
-                rounded={true}>
-                Boards
-              </Button>
+              <Link to="/me/boards">
+                <Button
+                  className="brand-blue-bg"
+                  rounded={true}>
+                  Boards
+                </Button>
+              </Link>
             </nav>
-            <div className="profile-picture">
-              <img src={user.getIn(['profile', 'picture'])} role="presentation" />
-            </div>
+            <ProfilePicture picture={user.getIn(['profile', 'picture'])} />
           </div>
         }
       </header>

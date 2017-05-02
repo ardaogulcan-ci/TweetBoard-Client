@@ -1,0 +1,12 @@
+.profile-picture {
+  position: relative;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-picture img {
+  width: 55px;
+  height: 55px;
+}

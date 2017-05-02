@@ -8,8 +8,9 @@ html {
   -webkit-font-smoothing: antialiased;
 }
 
-body {
+body, #root, #root > div {
   margin: 0;
+  height: 100%;
 }
 
 h1 {

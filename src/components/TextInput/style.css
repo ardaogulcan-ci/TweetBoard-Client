@@ -12,6 +12,12 @@
 
   transition: border-color 0.3s;
 }
+.text-input.small {
+  height: 40px;
+  line-height: 40px;
+  padding: 10px;
+  font-size: 1em;
+}
 
 .text-input:focus {
   border-color: #47525E;

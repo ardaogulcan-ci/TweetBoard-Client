@@ -1,0 +1,12 @@
+.edit-box-dialog .visual-box {
+  display: flex;
+}
+
+.edit-box-dialog .visual-box .visual-box-item {
+  flex: 1 0 auto;
+  width: 24%!important;
+  margin-right: 1%;
+}
+.edit-box-dialog .visual-box .visual-box-item:last-child {
+  margin-right: 0;
+}

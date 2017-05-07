@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
+import Avatar from 'material-ui/Avatar';
+
 import TwitterButton from '../../components/TwitterButton/TwitterButton';
 import Button from '../../components/Button/Button';
-import ProfilePicture from '../../components/ProfilePicture/ProfilePicture';
 
 import './style.css';
 
@@ -43,7 +44,7 @@ class Header extends Component {
                 </Button>
               </Link>
             </nav>
-            <ProfilePicture picture={user.getIn(['profile', 'picture'])} />
+            <Avatar src={user.getIn(['profile', 'picture'])} size={55} />
           </div>
         }
       </header>

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import styles from './style.css';
 
-class TextInput extends Component {
+class SearchInput extends Component {
   render() {
     const {
       className,
@@ -18,12 +18,12 @@ class TextInput extends Component {
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`text-input ${className} ${!valid ? styles.invalid : ''}`} />
+        className={`search-input ${className} ${!valid ? styles.invalid : ''}`} />
     );
   }
 }
 
-TextInput.propTypes = {
+SearchInput.propTypes = {
   type: PropTypes.string,
   className: PropTypes.string,
   onChange: PropTypes.func,
@@ -32,7 +32,7 @@ TextInput.propTypes = {
   value: PropTypes.string.isRequired,
 };
 
-TextInput.defaultProps = {
+SearchInput.defaultProps = {
   type: 'text',
   className: '',
   placeholder: '',
@@ -40,4 +40,4 @@ TextInput.defaultProps = {
   value: '',
 }
 
-export default TextInput;
+export default SearchInput;

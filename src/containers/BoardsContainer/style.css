@@ -9,7 +9,7 @@
 }
 
 .boards-container .board-explorer {
-  flex: 0 1 auto;
+  flex: 1 0 auto;
 }
 
 .boards-container .board {

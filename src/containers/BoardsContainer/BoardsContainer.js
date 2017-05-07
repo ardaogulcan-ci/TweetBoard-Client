@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import{ connect } from 'react-redux';
 
-import TextField from 'material-ui/TextField';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
-
-import { SHARE_TYPE } from '../../helpers/enums';
 import BoardExplorer from '../../components/BoardExplorer/BoardExplorer';
 import Board from '../../components/Board/Board';
-import EditDialog from '../../components/EditDialog/EditDialog';
+import EditBoardDialog from '../../components/EditBoardDialog/EditBoardDialog';
+import EditBoxDialog from '../../components/EditBoxDialog/EditBoxDialog';
 
-import { requestBoards } from '../../actions/users';
+import { requestBoards, requestBoardDetails, requestSaveBoard, requestSaveBox } from '../../actions/users';
 
 import './style.css';
 
@@ -19,68 +15,120 @@ class BoardsContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showAddBoardDialog: false,
+      userSlug: props.params.userSlug,
+      boardSlug: props.params.boardSlug,
+      showEditBoardDialog: false,
+      showEditBoxDialog: false,
+      editBoxBoardId: undefined,
+      boards: undefined,
+      selectedBoard: undefined,
     }
   }
 
   componentDidMount() {
-    if (!this.props.user) {
+    this.props.dispatch(requestBoards(this.state.userSlug, this.state.boardSlug));
+  }
+
+  getBoardDetails(userSlug, boardSlug, boardId) {
+    this.props.dispatch(
+      requestBoardDetails(userSlug, boardSlug, boardId)
+    );
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(!nextProps.users) {
+      return;
+    }
+    const users = nextProps.users;
+    const boards = users.getIn([this.state.userSlug, 'boards']);
+
+    if (!boards) {
       return;
     }
 
-    const { userSlug } = this.props.params;
-
-    this.props.dispatch(requestBoards(userSlug));
-  }
-
-  getBoards() {
-    const users = this.props.users;
-
-    if(!users) {
-      return;
+    let selectedBoard;
+    if (this.state.boardSlug) {
+      selectedBoard = boards.get(this.state.boardSlug);
     }
 
-    return  users.getIn([this.props.params.userSlug, 'boards']);
-
-  }
-
-  handleAddBoard() {
     this.setState({
-      showAddBoardDialog: true,
+      boards: boards,
+      selectedBoard: selectedBoard,
+    })
+  }
+
+  handleGetBoardDetails() {
+    this.getBoardDetails(this.state.userSlug, this.state.boardSlug, this.state.selectedBoard.get('_id'));
+  }
+
+  handleBoardChange(value) {
+    this.getBoardDetails(this.state.userSlug, value, this.state.boards.getIn([value, '_id']));
+    this.setState({
+      boardSlug: value,
+    });
+  }
+
+  handleEditBoard() {
+    this.setState({
+      showEditBoardDialog: true,
+    })
+  }
+
+  handleEditBox(boardId) {
+    this.setState({
+      showEditBoxDialog: true,
+      editBoxBoardId: boardId,
+    })
+  }
+
+  handleEditBoardSave(board) {
+    this.props.dispatch(requestSaveBoard(this.state.userSlug, board));
+    this.handleEditBoardClose();
+  }
+
+  handleEditBoxSave(box) {
+    this.props.dispatch(requestSaveBox(this.state.userSlug,
+      this.state.boardSlug, this.state.editBoxBoardId, box));
+    this.handleEditBoxClose();
+  }
+
+  handleEditBoardClose() {
+    this.setState({
+      showEditBoardDialog: false,
+    })
+  }
+
+  handleEditBoxClose() {
+    this.setState({
+      showEditBoxDialog: false,
+      editBoxBoardId: undefined,
     })
   }
 
   render() {
-    const { user, params } = this.props;
-    const boards = this.getBoards();
+    const { user } = this.props;
+    const { boards, selectedBoard } = this.state;
 
     return (
       <div className="boards-container">
         <BoardExplorer
-          user={user}
-          boards={boards}
-          currentBoard={params.boardSlug}
-          onAddBoard={this.handleAddBoard.bind(this)}></BoardExplorer>
-        <Board></Board>
-        <EditDialog title="Add New Board" open={this.state.showAddBoardDialog}>
-            <TextField
-              id="boardTitle"
-              hintText="Give a title for the board"
-              floatingLabelText="Board Title"
-              floatingLabelFixed={true}
-              fullWidth={true} />
-            <SelectField
-              id="sharedType"
-              hintText="Select how you want to share this board"
-              floatingLabelText="Sharing Type"
-              floatingLabelFixed={true}
-              autoWidth={false}
-              style={{width: '100%'}}>
-              { Object.keys(SHARE_TYPE).map( (key, index) =>
-                <MenuItem key={index} value={SHARE_TYPE[key]} primaryText={key} />
-              )}
-            </SelectField>
-        </EditDialog>
+          user={user && user}
+          boards={boards && boards}
+          currentBoard={selectedBoard && selectedBoard.get('slug')}
+          onEditBoard={this.handleEditBoard.bind(this)}
+          onBoardChange={this.handleBoardChange.bind(this)}/>
+        <Board
+          board={selectedBoard && selectedBoard}
+          onAddBox={this.handleEditBox.bind(this)}
+          getBoardDetails={this.handleGetBoardDetails.bind(this)}/>
+        <EditBoardDialog
+          open={this.state.showEditBoardDialog}
+          onSave={this.handleEditBoardSave.bind(this)}
+          onCancel={this.handleEditBoardClose.bind(this)} />
+        <EditBoxDialog
+          open={this.state.showEditBoxDialog}
+          onSave={this.handleEditBoxSave.bind(this)}
+          onCancel={this.handleEditBoxClose.bind(this)} />
       </div>
     );
   }

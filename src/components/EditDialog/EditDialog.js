@@ -19,17 +19,20 @@ class EditDialog extends Component {
   render() {
     return (
       <Dialog
+        className={this.props.className}
+        bodyClassName={this.props.bodyClassName}
         title={this.props.title}
+        autoScrollBodyContent={true}
         actions={[
           <FlatButton
-            label="İptal Et"
+            label="Cancel"
             secondary={true}
             onTouchTap={this.props.onCancel}
           />,
           <FlatButton
-            label="Onayla"
+            label="Save"
             primary={true}
-            onTouchTap={this.props.onConfirm}
+            onTouchTap={this.props.onSave}
           />,
         ]}
         open={this.state.showDialog}>
@@ -42,8 +45,10 @@ class EditDialog extends Component {
 
 EditDialog.propTypes = {
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  bodyClassName: PropTypes.string,
   open: PropTypes.bool.isRequired,
-  onConfirm: PropTypes.func,
+  onSave: PropTypes.func,
   onCancel: PropTypes.func,
   title: PropTypes.string
 }

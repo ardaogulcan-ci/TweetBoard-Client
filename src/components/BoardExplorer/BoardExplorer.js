@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 
-import { zIndex } from 'material-ui/styles';
+import { zIndex, colors } from 'material-ui/styles';
 import Avatar from 'material-ui/Avatar';
 import {List, ListItem, makeSelectable} from 'material-ui/List';
 import Drawer from 'material-ui/Drawer';
+import FlatButton from 'material-ui/FlatButton';
 
-import Button from '../Button/Button';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import './style.css';
 
@@ -14,8 +16,16 @@ const SelectableList = makeSelectable(List);
 
 class BoardExplorer extends Component {
 
+  handleBoardChange(event, slug) {
+    if (this.props.onBoardChange && slug !== this.props.currentBoard) {
+      this.props.onBoardChange(slug);
+    }
+  }
+
   render() {
-    const { user, boards, onAddBoard } = this.props;
+    const { user, boards, onEditBoard, currentBoard } = this.props;
+
+    const selectedBoard = currentBoard;
 
     return (
       <div className="board-explorer">
@@ -35,26 +45,29 @@ class BoardExplorer extends Component {
                 } />
             </SelectableList>
           }
+          <FlatButton
+            backgroundColor={colors.cyan500}
+            className="add-board-button"
+            hoverColor={colors.cyan200}
+            rippleColor={colors.cyan700}
+            label="Add New Board"
+            icon={<ContentAdd color="white"/>}
+            onTouchTap={onEditBoard}
+          />
           <SelectableList
-            value={null}>
-            { boards && boards.map( (item, key) =>
+            value={selectedBoard}
+            onChange={this.handleBoardChange.bind(this)}>
+            { boards && boards.valueSeq().map((item, key) =>
               <ListItem
+                containerElement={
+                  <Link to={`/${user.get('slug')}/boards/${item.get('slug')}`} />
+                }
+                key={key}
+                value={item.get('slug')}
                 primaryText={item.get('title')}
-                primaryTogglesNestedList={true}
-                nestedItems={[
-                  <ListItem primaryText="Share Board" value="share" />,
-                  <ListItem primaryText="Delete board" value="delete" />,
-                ]} />
+                initiallyOpen={selectedBoard === item.get('slug')} />
             )}
           </SelectableList>
-          <div className="add-board-button-container">
-            <Button
-              className='brand-blue-bg'
-              onClick={onAddBoard}
-              rounded={true}>
-              Add New Board
-            </Button>
-          </div>
         </Drawer>
       </div>
     );
@@ -65,7 +78,8 @@ BoardExplorer.propTypes = {
   user: PropTypes.any,
   boards: PropTypes.any,
   currentBoard: PropTypes.string,
-  onAddBoard: PropTypes.func,
+  onEditBoard: PropTypes.func,
+  onBoardChange: PropTypes.func,
 }
 
 export default BoardExplorer;

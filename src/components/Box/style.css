@@ -1,0 +1,22 @@
+.boards-container .board-container .box-container .box {
+  min-width: 300px;
+  min-height: 300px;
+  display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.boards-container .board-container .box-container .box .empty {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  margin-top: 26px;
+  transform: translateY(-50%);
+  text-align: center;
+  cursor: pointer;
+}
+
+.boards-container .board-container .box-container .box .empty .text {
+  margin-top: 20px;
+}

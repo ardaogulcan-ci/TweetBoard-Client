@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import{ connect } from 'react-redux';
 
 import Header from '../../components/Header/Header';
-import TextInput from '../../components/TextInput/TextInput';
+import SearchInput from '../../components/SearchInput/SearchInput';
 
 import { twitterAuthRequest } from '../../actions/authentication';
 
@@ -25,7 +25,7 @@ class HomeContainer extends Component {
           user={user}
           />
         <main>
-          <TextInput type="text" />
+          <SearchInput type="text" />
         </main>
       </div>
     );

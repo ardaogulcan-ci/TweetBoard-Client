@@ -1,0 +1,20 @@
+.edit-board-dialog .add-user-box .input-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.edit-board-dialog .add-user-box .input-box .email-input {
+  flex: 1 0 auto;
+}
+.edit-board-dialog .add-user-box .input-box .privileges-input {
+  flex: 0 1 auto;
+  width: 300px;
+  display: flex;
+}
+.edit-board-dialog .add-user-box .input-box .confirm-input {
+  flex: 0 1 auto;
+  width: 40px;
+}
+.edit-board-dialog .add-user-box .input-box .privileges-input > div {
+  width: 100px!important;
+}

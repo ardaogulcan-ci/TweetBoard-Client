@@ -1,4 +1,4 @@
-.text-input {
+.search-input {
   font-family: 'Roboto', sans-serif;
   background: white;
   border: 1px solid #E6E6E6;
@@ -12,14 +12,14 @@
 
   transition: border-color 0.3s;
 }
-.text-input.small {
+.search-input.small {
   height: 40px;
   line-height: 40px;
   padding: 10px;
   font-size: 1em;
 }
 
-.text-input:focus {
+.search-input:focus {
   border-color: #47525E;
 }
 

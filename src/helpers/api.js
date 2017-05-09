@@ -94,8 +94,9 @@ export default class Api {
     })
   }
 
-  searchTweetsWithQuery(query) {
-    return fetch(`${this._url}/twitter/search?q=${query}`, {
+  getTwitter(url, term) {
+    const encodedURL = `${this._url}/twitter/${url}?${term}`;
+    return fetch(encodedURL, {
       method: 'get',
       headers: this.header(),
     })

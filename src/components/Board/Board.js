@@ -54,7 +54,7 @@ class Board extends Component {
           </div>
           <div className="box-container">
             { boxes && boxes.map((box, index) =>
-              <Box key={index} box={box} />
+              <Box key={index} box={box} onUpdate={this.props.onUpdateBox} />
             )}
           </div>
         </div>
@@ -67,7 +67,7 @@ class Board extends Component {
 Board.PropTypes = {
   board: PropTypes.any,
   onAddBox: PropTypes.func,
-  getBoardDetails: PropTypes.func,
+  onUpdateBox: PropTypes.func,
 }
 
 export default Board;

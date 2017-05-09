@@ -4,8 +4,6 @@ import { fromJS } from 'immutable';
 import TextField from 'material-ui/TextField';
 import EditDialog from '../../components/EditDialog/EditDialog';
 
-import './style.css';
-
 const initialBox = fromJS({
   title: '',
   description: '',

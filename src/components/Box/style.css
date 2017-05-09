@@ -1,7 +1,9 @@
 .boards-container .board-container .box-container .box {
-  min-width: 300px;
-  min-height: 300px;
+  width: 400px;
+  height: 410px;
+
   display: inline-block;
+  vertical-align: top;
   margin-right: 20px;
   margin-bottom: 20px;
   position: relative;
@@ -19,4 +21,8 @@
 
 .boards-container .board-container .box-container .box .empty .text {
   margin-top: 20px;
+}
+
+.boards-container .board-container .box-container .box .query-viewer {
+  max-height: 350px;
 }

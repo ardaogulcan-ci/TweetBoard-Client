@@ -19,7 +19,6 @@ class BoardsContainer extends Component {
       boardSlug: props.params.boardSlug,
       showEditBoardDialog: false,
       showEditBoxDialog: false,
-      editBoxBoardId: undefined,
       boards: undefined,
       selectedBoard: undefined,
     }
@@ -57,10 +56,6 @@ class BoardsContainer extends Component {
     })
   }
 
-  handleGetBoardDetails() {
-    this.getBoardDetails(this.state.userSlug, this.state.boardSlug, this.state.selectedBoard.get('_id'));
-  }
-
   handleBoardChange(value) {
     this.getBoardDetails(this.state.userSlug, value, this.state.boards.getIn([value, '_id']));
     this.setState({
@@ -77,7 +72,6 @@ class BoardsContainer extends Component {
   handleEditBox(boardId) {
     this.setState({
       showEditBoxDialog: true,
-      editBoxBoardId: boardId,
     })
   }
 
@@ -86,9 +80,14 @@ class BoardsContainer extends Component {
     this.handleEditBoardClose();
   }
 
+  handleUpdateBox(box) {
+    this.props.dispatch(requestSaveBox(this.state.userSlug,
+      this.state.boardSlug, this.state.selectedBoard.get('_id'), box));
+  }
+
   handleEditBoxSave(box) {
     this.props.dispatch(requestSaveBox(this.state.userSlug,
-      this.state.boardSlug, this.state.editBoxBoardId, box));
+      this.state.boardSlug, this.state.selectedBoard.get('_id'), box));
     this.handleEditBoxClose();
   }
 
@@ -101,7 +100,6 @@ class BoardsContainer extends Component {
   handleEditBoxClose() {
     this.setState({
       showEditBoxDialog: false,
-      editBoxBoardId: undefined,
     })
   }
 
@@ -120,7 +118,7 @@ class BoardsContainer extends Component {
         <Board
           board={selectedBoard && selectedBoard}
           onAddBox={this.handleEditBox.bind(this)}
-          getBoardDetails={this.handleGetBoardDetails.bind(this)}/>
+          onUpdateBox={this.handleUpdateBox.bind(this)}/>
         <EditBoardDialog
           open={this.state.showEditBoardDialog}
           onSave={this.handleEditBoardSave.bind(this)}

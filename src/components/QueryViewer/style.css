@@ -21,6 +21,7 @@
   margin-right: 20px;
   width: 55px!important;
   height: 55px!important;
+  justify-content: flex-start!important;
 }
 .query-viewer .query .text {
   margin-right: 10px;

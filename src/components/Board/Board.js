@@ -33,12 +33,10 @@ class Board extends Component {
               title={board && board.get('title')}
               iconElementRight={
                 <MoreMenu>
-                  <MenuItem primaryText="Refresh" />
-                  <MenuItem primaryText="Help" />
-                  <MenuItem primaryText="Sign out" />
+                  <MenuItem primaryText="Edit Board" />
                 </MoreMenu>
               }
-              iconElementLeft={<IconButton><NavigationClose /></IconButton>}/>
+              iconElementLeft={<IconButton onTouchTap={this.props.onCloseBoard}><NavigationClose /></IconButton>}/>
             <div className="tool-box">
               <div className="add-button" onClick={this.handleAddBox.bind(this)}>
                 <FloatingActionButton
@@ -68,6 +66,7 @@ Board.PropTypes = {
   board: PropTypes.any,
   onAddBox: PropTypes.func,
   onUpdateBox: PropTypes.func,
+  onCloseBoard: PropTypes.func
 }
 
 export default Board;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import{ connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 import BoardExplorer from '../../components/BoardExplorer/BoardExplorer';
 import Board from '../../components/Board/Board';
@@ -103,6 +104,10 @@ class BoardsContainer extends Component {
     })
   }
 
+  handleBoardClose() {
+    this.props.dispatch(push('/'));
+  }
+
   render() {
     const { user } = this.props;
     const { boards, selectedBoard } = this.state;
@@ -118,6 +123,7 @@ class BoardsContainer extends Component {
         <Board
           board={selectedBoard && selectedBoard}
           onAddBox={this.handleEditBox.bind(this)}
+          onCloseBoard={this.handleBoardClose.bind(this)}
           onUpdateBox={this.handleUpdateBox.bind(this)}/>
         <EditBoardDialog
           open={this.state.showEditBoardDialog}

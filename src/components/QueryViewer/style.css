@@ -6,7 +6,6 @@
 }
 
 .query-viewer .query .query-link {
-  display: flex;
   align-items: center;
   vertical-align: center;
   color: black;
@@ -21,10 +20,11 @@
   margin-right: 20px;
   width: 55px!important;
   height: 55px!important;
-  justify-content: flex-start!important;
+  display: inline-block;
 }
 .query-viewer .query .text {
   margin-right: 10px;
-  vertical-align: center;
-  flex: 0 1 auto;
+  vertical-align: top;
+  width: 275px;
+  display: inline-block;
 }
